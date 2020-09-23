@@ -1,0 +1,15 @@
+.topic-link {
+  padding: 1em 1.5em;
+  color: var(--white);
+  border-radius: var(--border-radius-md);
+  transition: all 0.2s ease;
+}
+
+.topic-link:not(:last-child) {
+  margin-right: 1em;
+}
+
+.topic-link:hover {
+  background: var(--white) !important;
+  color: var(--orange-500);
+}
