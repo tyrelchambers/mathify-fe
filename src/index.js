@@ -3,14 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { HOME } from "./routes/routes";
+import { EQUATION, HOME } from "./routes/routes";
 import { Home } from "./pages/Home/Home";
 import "./assets/main.css";
+import { EquationWrapper } from "./layouts/EquationWrapper/EquationWrapper";
 const AppWrapper = () => {
   return (
     <Router basename="/">
       <Switch>
         <Route exact path={HOME} component={Home} />
+        <Route exact path={EQUATION} component={EquationWrapper} />
       </Switch>
     </Router>
   );

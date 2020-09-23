@@ -5,7 +5,7 @@ import "./Topic.css";
 export const Topic = () =>
   topics.map((topic) => (
     <Link
-      to={`/${topic.slug}/new`}
+      to={`/${topic.slug}`}
       className="topic-link orange-gradient box-shadow block"
     >
       {topic.label}

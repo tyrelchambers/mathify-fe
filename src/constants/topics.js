@@ -1,22 +1,24 @@
+const BASE = "equation";
+
 export const topics = [
   {
-    slug: "functions",
-    label: "Functions",
+    slug: BASE + "/fractions",
+    label: "Fractions",
   },
   {
-    slug: "decimals",
+    slug: BASE + "/decimals",
     label: "Decimals",
   },
   {
-    slug: "addition",
+    slug: BASE + "/addition",
     label: "Addition",
   },
   {
-    slug: "subtraction",
+    slug: BASE + "/subtraction",
     label: "Subtraction",
   },
   {
-    slug: "percentages",
+    slug: BASE + "/percentages",
     label: "Percentages",
   },
 ];
