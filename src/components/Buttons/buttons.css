@@ -1,0 +1,18 @@
+.btn {
+  padding: 1em;
+  background: var(--gray-200);
+  margin: 0em 0.5em;
+  border-radius: var(--border-radius-md);
+  font-weight: bold;
+  color: var(--gray-800);
+  transition: all 0.2s ease;
+}
+
+.btn.primary:hover {
+  background: var(--gray-400);
+}
+
+.btn.primary.active {
+  background: var(--orangeGradient);
+  color: var(--white);
+}
