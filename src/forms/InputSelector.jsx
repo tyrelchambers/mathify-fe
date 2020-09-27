@@ -6,7 +6,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
       return (
         <input
           type="number"
-          name="setOfIntegers"
+          name={stateKey}
           className="form-input mt-4"
           placeholder="0"
           onChange={(e) =>
@@ -20,7 +20,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
         <div className="flex items-center mt-4">
           <input
             type="number"
-            name="setOfIntegers"
+            name={stateKey}
             className="form-input"
             placeholder="0"
             onChange={(e) =>
@@ -37,7 +37,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
 
           <input
             type="number"
-            name="setOfIntegers"
+            name={stateKey}
             className="form-input"
             placeholder="0"
             onChange={(e) =>

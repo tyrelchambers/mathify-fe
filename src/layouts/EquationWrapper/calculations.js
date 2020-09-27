@@ -1,16 +1,15 @@
 import React from "react";
 
-const randomizeIntegers = ({ min, max, type, loopCount } = {}) => {
+// returns a random min and max of integers if type === range else it returns an array of randoms
+const randomizeIntegers = ({ min = 0, max = 1000, type, loopCount } = {}) => {
   let range = {
     min: 0,
     max: 0,
   };
-  let minInt = min || 0;
-  let maxInt = max || 1000;
 
   if (type === "range") {
     const calcMin = () => {
-      let int = Math.floor(Math.random() * (maxInt - minInt + 1) + minInt);
+      let int = Math.floor(Math.random() * (max - min + 1) + min);
 
       if (int > range.max) {
         return calcMin();
@@ -35,6 +34,7 @@ const randomizeIntegers = ({ min, max, type, loopCount } = {}) => {
   }
 };
 
+// creates the individual equations give a range of integers
 const createIntegerSet = ({ min, max, intCount, int } = {}) => {
   if (min && max) {
     const range = [];
@@ -51,6 +51,4 @@ const createIntegerSet = ({ min, max, intCount, int } = {}) => {
   }
 };
 
-const buildEquation = ({ state, btnState }) => {};
-
-export { buildEquation, randomizeIntegers, createIntegerSet };
+export { randomizeIntegers, createIntegerSet };

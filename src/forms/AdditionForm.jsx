@@ -8,10 +8,9 @@ import "./form.css";
 import { InputSelector } from "./InputSelector";
 import { additionOps } from "../layouts/EquationWrapper/options.ui";
 
-export const AdditionForm = ({ state, dispatch, generatePreview }) => {
+export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
   return (
     <form className="form">
-      {console.log(state)}
       <div className="field-group">
         <FormLabel forName="numOfQuestions" label="Number of Questions?" />
         <input
@@ -35,9 +34,10 @@ export const AdditionForm = ({ state, dispatch, generatePreview }) => {
         <div className="flex mt-2">
           {additionOps.setValues.map((op) => (
             <PrimaryButton
-              onClick={() =>
-                dispatch({ type: "updateSetValuesUI", payload: op.name })
-              }
+              onClick={() => {
+                dispatch({ type: "updateSetValuesUI", payload: op.name });
+                dispatch({ type: "resetSetValues", payload: op.name });
+              }}
               classes={`${
                 state.btnUIState.setValues === op.name ? "active" : ""
               }`}
@@ -64,9 +64,10 @@ export const AdditionForm = ({ state, dispatch, generatePreview }) => {
         <div className="flex mt-2">
           {additionOps.setOfIntegers.map((op) => (
             <PrimaryButton
-              onClick={() =>
-                dispatch({ type: "updateSetOfIntegersUI", payload: op.name })
-              }
+              onClick={() => {
+                dispatch({ type: "updateSetOfIntegersUI", payload: op.name });
+                dispatch({ type: "resetSetOfIntegers", payload: op.name });
+              }}
               classes={`${
                 state.btnUIState.setOfIntegers === op.name ? "active" : ""
               }`}
@@ -85,7 +86,7 @@ export const AdditionForm = ({ state, dispatch, generatePreview }) => {
         />
       </div>
 
-      <SubmitButton classes="shadow-lg" onClick={generatePreview}>
+      <SubmitButton classes="shadow-lg" onClick={generateWorksheet}>
         <i className="fas fa-angle-double-right mr-4"></i>
         Generate
       </SubmitButton>

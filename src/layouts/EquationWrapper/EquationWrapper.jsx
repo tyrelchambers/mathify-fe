@@ -19,9 +19,16 @@ export const EquationWrapper = () => {
   }
 
   const generatePreview = () => {
+    let randomSetValues;
+    let setOfIntegers;
+
     switch (state.btnUIState.setValues) {
       case "randomize":
         const ints = randomizeIntegers({ type: "range" });
+        randomSetValues = {
+          min: ints.min,
+          max: ints.max,
+        };
         dispatch({
           type: "updateSetValues",
           payload: {
@@ -36,33 +43,39 @@ export const EquationWrapper = () => {
     }
 
     switch (state.btnUIState.setOfIntegers) {
-      case "randomize":
-        if (state.btnUIState.setOfIntegers === "range") {
-          const ints = randomizeIntegers({
-            type: "range",
-          });
-          const set = createIntegerSet({ max: ints.max, min: ints.min });
-          console.log(set);
-        }
-
-        if (state.btnUIState.setOfIntegers === "custom") {
-          const int = randomizeIntegers({
-            type: "custom",
-            loopCount: 2,
-          });
-          console.log(int);
-        }
+      case "range":
+        const ints = randomizeIntegers({
+          type: "range",
+        });
 
         break;
 
+      case "custom":
+        const int = randomizeIntegers({
+          type: "custom",
+          loopCount: state.setOfIntegers,
+        });
+
+        setOfIntegers = [...int];
+        break;
       default:
         break;
     }
+
+    return {
+      randomSetValues,
+      setOfIntegers,
+    };
+  };
+
+  const generateWorksheet = () => {
+    const { randomSetValues, setOfIntegers } = generatePreview();
+    console.log(randomSetValues, setOfIntegers);
   };
 
   const defaultProps = {
     state,
-    generatePreview,
+    generateWorksheet,
     dispatch,
   };
 
@@ -73,7 +86,7 @@ export const EquationWrapper = () => {
   return (
     <DisplayWrapper>
       <div className="p-4 bg-gray-100 rounded-lg flex justify-center shadow-md">
-        <H2 className="capitalize text-red-500">{equation}</H2>
+        <H2 className="capitalize text-orange-500">{equation}</H2>
       </div>
       <div className="flex">
         <div className="w-3/5">{forms[equation]}</div>

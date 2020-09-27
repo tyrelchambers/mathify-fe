@@ -1,7 +1,6 @@
 import React from "react";
 
 export const equationReducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case "updateNumOfQuestions":
       return {
@@ -9,14 +8,20 @@ export const equationReducer = (state, action) => {
         numOfQuestions: action.payload,
       };
     case "updateSetOfIntegers":
-      console.log(state);
-      if (state.btnState.setOfIntegers === "range") {
+      if (state.btnUIState.setOfIntegers === "range") {
         return {
           ...state,
           setOfIntegers: {
             ...state.setOfIntegers,
             ...action.payload,
           },
+        };
+      }
+
+      if (state.btnUIState.setOfIntegers === "custom") {
+        return {
+          ...state,
+          setOfIntegers: action.payload,
         };
       }
       break;
@@ -44,6 +49,24 @@ export const equationReducer = (state, action) => {
         btnUIState: {
           ...state.btnUIState,
           setOfIntegers: action.payload,
+        },
+      };
+
+    case "resetSetOfIntegers":
+      return {
+        ...state,
+        setOfIntegers: {
+          min: 0,
+          max: 0,
+        },
+      };
+
+    case "resetSetValues":
+      return {
+        ...state,
+        setValues: {
+          min: 0,
+          max: 0,
         },
       };
 
