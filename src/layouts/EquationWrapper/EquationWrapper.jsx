@@ -1,46 +1,74 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EqPreview } from "../../components/EqPreview/EqPreview";
 import { H2 } from "../../components/Headings/Headings";
 import { AdditionForm } from "../../forms/AdditionForm";
+import { equationReducer } from "../../reducers/equationReducer";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
-import { additionState } from "./defaultState";
+import { createIntegerSet, randomizeIntegers } from "./calculations";
+import { defaultState } from "./defaultState";
 
 export const EquationWrapper = () => {
   const { equation } = useParams();
 
-  const [btnState, setBtnState] = useState({
-    setOfDigits: "",
-    setValues: "",
-  });
+  const [state, dispatch] = useReducer(equationReducer, defaultState);
 
-  const [state, setState] = useState({});
+  if (!acceptedEquationRoutes.includes(equation)) {
+    return null;
+  }
 
-  useEffect(() => {
-    switch (equation) {
-      case "addition":
-        setState(additionState);
+  const generatePreview = () => {
+    switch (state.btnUIState.setValues) {
+      case "randomize":
+        const ints = randomizeIntegers({ type: "range" });
+        dispatch({
+          type: "updateSetValues",
+          payload: {
+            min: ints.min,
+            max: ints.max,
+          },
+        });
         break;
+
+      default:
+        return;
+    }
+
+    switch (state.btnUIState.setOfIntegers) {
+      case "randomize":
+        if (state.btnUIState.setOfIntegers === "range") {
+          const ints = randomizeIntegers({
+            type: "range",
+          });
+          const set = createIntegerSet({ max: ints.max, min: ints.min });
+          console.log(set);
+        }
+
+        if (state.btnUIState.setOfIntegers === "custom") {
+          const int = randomizeIntegers({
+            type: "custom",
+            loopCount: 2,
+          });
+          console.log(int);
+        }
+
+        break;
+
       default:
         break;
     }
-  }, [equation]);
+  };
 
   const defaultProps = {
-    btnState,
-    setBtnState,
     state,
-    setState,
+    generatePreview,
+    dispatch,
   };
 
   const forms = {
     addition: <AdditionForm {...defaultProps} />,
   };
-
-  if (!acceptedEquationRoutes.includes(equation)) {
-    return null;
-  }
 
   return (
     <DisplayWrapper>

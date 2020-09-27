@@ -1,9 +1,5 @@
 export const additionOps = {
-  setOfDigits: [
-    {
-      label: "Randomize",
-      name: "randomize",
-    },
+  setOfIntegers: [
     {
       label: "Custom",
       name: "custom",
@@ -17,10 +13,6 @@ export const additionOps = {
     {
       label: "Randomize",
       name: "randomize",
-    },
-    {
-      label: "Custom",
-      name: "custom",
     },
     {
       label: "Range",

@@ -12,3 +12,16 @@ export const PrimaryButton = (props) => {
     </button>
   );
 };
+
+export const SubmitButton = (props) => {
+  return (
+    <button
+      type="button"
+      className={`${props.classes} btn submit`}
+      onClick={props.onClick}
+      {...props}
+    >
+      {props.children}
+    </button>
+  );
+};

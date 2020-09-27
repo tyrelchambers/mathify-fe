@@ -1,13 +1,17 @@
 .btn {
-  padding: 1em;
   background: var(--gray-200);
   margin: 0em 0.5em;
   border-radius: var(--border-radius-md);
   font-weight: bold;
   color: var(--gray-800);
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
 }
 
+.btn.primary {
+  padding: 1em;
+}
 .btn.primary:hover {
   background: var(--gray-400);
 }
@@ -15,4 +19,16 @@
 .btn.primary.active {
   background: var(--orangeGradient);
   color: var(--white);
+}
+
+.btn.submit {
+  background-color: var(--gray-800);
+  color: var(--green-500);
+  padding: 0.5em 1em;
+  transition: all 0.2s ease;
+}
+
+.btn.submit:hover {
+  color: var(--gray-800);
+  background-color: var(--green-500);
 }

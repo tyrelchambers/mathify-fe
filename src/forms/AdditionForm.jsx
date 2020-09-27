@@ -1,13 +1,17 @@
 import React from "react";
-import { PrimaryButton } from "../components/Buttons/PrimaryButton";
+import {
+  PrimaryButton,
+  SubmitButton,
+} from "../components/Buttons/PrimaryButton";
 import { FormLabel } from "../components/FormLabel/FormLabel";
 import "./form.css";
 import { InputSelector } from "./InputSelector";
-import { additionOps } from "../layouts/EquationWrapper/options";
+import { additionOps } from "../layouts/EquationWrapper/options.ui";
 
-export const AdditionForm = ({ state, setState, btnState, setBtnState }) => {
+export const AdditionForm = ({ state, dispatch, generatePreview }) => {
   return (
     <form className="form">
+      {console.log(state)}
       <div className="field-group">
         <FormLabel forName="numOfQuestions" label="Number of Questions?" />
         <input
@@ -17,28 +21,9 @@ export const AdditionForm = ({ state, setState, btnState, setBtnState }) => {
           placeholder="0"
           value={state.numOfQuestions}
           onChange={(e) =>
-            setState({ ...state, [e.target.name]: e.target.value })
+            dispatch({ type: "updateNumOfQuestions", payload: e.target.value })
           }
         />
-      </div>
-
-      <div className="field-group">
-        <FormLabel
-          forName="setOfDigits"
-          label="How many integers per question?"
-        />
-        <div className="flex mt-2">
-          {additionOps.setOfDigits.map((op) => (
-            <PrimaryButton
-              onClick={() => setBtnState({ ...btnState, setOfDigits: op.name })}
-              classes={`${btnState.setOfDigits === op.name ? "active" : ""}`}
-              key={op.label}
-            >
-              {op.label}
-            </PrimaryButton>
-          ))}
-        </div>
-        <InputSelector state={btnState} stateKey="setOfDigits" />
       </div>
 
       <div className="field-group">
@@ -50,16 +35,60 @@ export const AdditionForm = ({ state, setState, btnState, setBtnState }) => {
         <div className="flex mt-2">
           {additionOps.setValues.map((op) => (
             <PrimaryButton
-              onClick={() => setBtnState({ ...btnState, setValues: op.name })}
-              classes={`${btnState.setValues === op.name ? "active" : ""}`}
+              onClick={() =>
+                dispatch({ type: "updateSetValuesUI", payload: op.name })
+              }
+              classes={`${
+                state.btnUIState.setValues === op.name ? "active" : ""
+              }`}
               key={op.label}
+              onChange={dispatch}
             >
               {op.label}
             </PrimaryButton>
           ))}
         </div>
-        <InputSelector state={btnState} stateKey="setValues" />
+        <InputSelector
+          dispatch={dispatch}
+          state={state}
+          dispatchType="updateSetValues"
+          stateKey="setValues"
+        />
       </div>
+
+      <div className="field-group">
+        <FormLabel
+          forName="setOfIntegers"
+          label="How many integers per question?"
+        />
+        <div className="flex mt-2">
+          {additionOps.setOfIntegers.map((op) => (
+            <PrimaryButton
+              onClick={() =>
+                dispatch({ type: "updateSetOfIntegersUI", payload: op.name })
+              }
+              classes={`${
+                state.btnUIState.setOfIntegers === op.name ? "active" : ""
+              }`}
+              key={op.label}
+              onChange={dispatch}
+            >
+              {op.label}
+            </PrimaryButton>
+          ))}
+        </div>
+        <InputSelector
+          dispatch={dispatch}
+          state={state}
+          dispatchType="updateSetOfIntegers"
+          stateKey="setOfIntegers"
+        />
+      </div>
+
+      <SubmitButton classes="shadow-lg" onClick={generatePreview}>
+        <i className="fas fa-angle-double-right mr-4"></i>
+        Generate
+      </SubmitButton>
     </form>
   );
 };
