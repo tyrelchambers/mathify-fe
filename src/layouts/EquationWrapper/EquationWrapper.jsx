@@ -81,7 +81,7 @@ export const EquationWrapper = () => {
       });
     }
 
-    console.log(equationson, integers);
+    console.log(equations, integers);
   };
 
   const defaultProps = {
