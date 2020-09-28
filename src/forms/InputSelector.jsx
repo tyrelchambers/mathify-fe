@@ -20,7 +20,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
         <div className="flex items-center mt-4">
           <input
             type="number"
-            name={stateKey}
+            name={`${stateKey}_min`}
             className="form-input"
             placeholder="0"
             onChange={(e) =>
@@ -37,7 +37,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
 
           <input
             type="number"
-            name={stateKey}
+            name={`${stateKey}_max`}
             className="form-input"
             placeholder="0"
             onChange={(e) =>

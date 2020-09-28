@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EqPreview } from "../../components/EqPreview/EqPreview";
 import { H2 } from "../../components/Headings/Headings";
+import { operations } from "../../constants/operations";
 import { AdditionForm } from "../../forms/AdditionForm";
 import { equationReducer } from "../../reducers/equationReducer";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
@@ -18,59 +19,69 @@ export const EquationWrapper = () => {
     return null;
   }
 
-  const generatePreview = () => {
-    let randomSetValues;
-    let setOfIntegers;
+  const generateWorksheet = () => {
+    let values, integers;
+    const numOfQuestionsInput = document.querySelector(
+      `input[name="numOfQuestions"]`
+    )?.value;
+    const rangeSetValuesMin = document.querySelector(
+      `input[name="setValues_min"]`
+    )?.value;
+    const rangeSetValuesMax = document.querySelector(
+      `input[name="setValues_max"]`
+    )?.value;
+    const rangeSetOfIntegersMin = document.querySelector(
+      `input[name="setOfIntegers_min"]`
+    )?.value;
+    const rangeSetOfIntegersMax = document.querySelector(
+      `input[name="setOfIntegers_max"]`
+    )?.value;
+    const setOfIntegersCustom = document.querySelector(
+      `input[name="setOfIntegers"]`
+    )?.value;
 
-    switch (state.btnUIState.setValues) {
-      case "randomize":
+    const { btnUIState } = state;
+    const equations = [];
+
+    for (let i = 0; i < numOfQuestionsInput; i++) {
+      if (btnUIState.setValues === "randomize") {
         const ints = randomizeIntegers({ type: "range" });
-        randomSetValues = {
+        values = {
           min: ints.min,
           max: ints.max,
         };
-        dispatch({
-          type: "updateSetValues",
-          payload: {
-            min: ints.min,
-            max: ints.max,
-          },
-        });
-        break;
+      }
 
-      default:
-        return;
-    }
-
-    switch (state.btnUIState.setOfIntegers) {
-      case "range":
+      if (btnUIState.setOfIntegers === "range") {
         const ints = randomizeIntegers({
           type: "range",
         });
 
-        break;
+        integers = {
+          min: ints.min,
+          max: ints.max,
+        };
+      } else if (btnUIState.setOfIntegers === "custom") {
+        let arr = [];
+        for (let k = 0; k < setOfIntegersCustom; k++) {
+          arr.push(
+            createIntegerSet({
+              min: values.min,
+              max: values.max,
+            })
+          );
+        }
+        console.log(arr);
+        integers = arr;
+      }
 
-      case "custom":
-        const int = randomizeIntegers({
-          type: "custom",
-          loopCount: state.setOfIntegers,
-        });
-
-        setOfIntegers = [...int];
-        break;
-      default:
-        break;
+      equations.push({
+        symbol: operations[equation],
+        digits: integers,
+      });
     }
 
-    return {
-      randomSetValues,
-      setOfIntegers,
-    };
-  };
-
-  const generateWorksheet = () => {
-    const { randomSetValues, setOfIntegers } = generatePreview();
-    console.log(randomSetValues, setOfIntegers);
+    console.log(equationson, integers);
   };
 
   const defaultProps = {

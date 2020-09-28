@@ -1,7 +1,7 @@
 import React from "react";
 
 // returns a random min and max of integers if type === range else it returns an array of randoms
-const randomizeIntegers = ({ min = 0, max = 1000, type, loopCount } = {}) => {
+const randomizeIntegers = ({ min = 0, max = 1000, type } = {}) => {
   let range = {
     min: 0,
     max: 0,
@@ -25,30 +25,13 @@ const randomizeIntegers = ({ min = 0, max = 1000, type, loopCount } = {}) => {
   }
 
   if (type === "custom") {
-    const results = [];
-
-    for (let i = 0; i < loopCount; i++) {
-      results.push(Math.floor(Math.random() * (max - min + 1) + min));
-    }
-    return results;
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 };
 
 // creates the individual equations give a range of integers
-const createIntegerSet = ({ min, max, intCount, int } = {}) => {
-  if (min && max) {
-    const range = [];
-    for (let i = 0; i < intCount; i++) {
-      range.push(Math.floor(Math.random() * (max - min + 1) + min));
-    }
-
-    return range;
-  }
-
-  if (int) {
-    let results = Math.floor(Math.random() * (max - min + 1) + min);
-    return results;
-  }
+const createIntegerSet = ({ min, max } = {}) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 export { randomizeIntegers, createIntegerSet };
