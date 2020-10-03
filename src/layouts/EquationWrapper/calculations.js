@@ -6,7 +6,7 @@ const randomizeIntegers = ({ min = 0, max = 1000 } = {}) => {
 
   let num = Math.floor(Math.random() * (minMax - minNum + 1)) + minNum;
 
-  return num < min || num > max ? randomizeIntegers() : [num];
+  return num < min || num > max ? randomizeIntegers() : num;
 };
 
 export { randomizeIntegers };

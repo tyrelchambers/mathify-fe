@@ -30,9 +30,8 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
             onChange={(e) =>
               dispatch({
                 type: dispatchType,
-                payload: {
-                  min: e.target.value,
-                },
+                payload: e.target.value,
+                elem: e.target.name,
               })
             }
           />
@@ -49,9 +48,8 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
             onChange={(e) =>
               dispatch({
                 type: dispatchType,
-                payload: {
-                  max: e.target.value,
-                },
+                payload: e.target.value,
+                elem: e.target.name,
               })
             }
           />

@@ -20,65 +20,33 @@ export const EquationWrapper = () => {
   }
 
   const generateWorksheet = () => {
-    let values, integers;
-    const numOfQuestionsInput = document.querySelector(
-      `input[name="numOfQuestions"]`
-    )?.value;
-    const rangeSetValuesMin = document.querySelector(
-      `input[name="setValues_min"]`
-    )?.value;
-    const rangeSetValuesMax = document.querySelector(
-      `input[name="setValues_max"]`
-    )?.value;
-    const rangeSetOfIntegersMin = document.querySelector(
-      `input[name="setOfIntegers_min"]`
-    )?.value;
-    const rangeSetOfIntegersMax = document.querySelector(
-      `input[name="setOfIntegers_max"]`
-    )?.value;
-    const setOfIntegersCustom = document.querySelector(
-      `input[name="setOfIntegers"]`
-    )?.value;
-
-    const { btnUIState } = state;
+    const { btnUIState, setValues, setOfIntegers, numOfQuestions } = state;
+    let values = [],
+      integers = [];
     const equations = [];
 
-    for (let i = 0; i < numOfQuestionsInput; i++) {
+    console.log(state);
+
+    for (let i = 0; i < numOfQuestions; i++) {
       if (btnUIState.setValues === "randomize") {
-        const ints = randomizeIntegers({ type: "range" });
-        values = {
-          min: ints.min,
-          max: ints.max,
-        };
-      }
-
-      if (btnUIState.setOfIntegers === "range") {
-        let [timesToLoop] = randomizeIntegers({
-          min: rangeSetOfIntegersMin,
-          max: rangeSetOfIntegersMax,
-        });
-
-        let arr = [];
-
-        for (let k = 0; k < timesToLoop; k++) {
-          let [int] = randomizeIntegers({
-            min: values.min,
-            max: values.max,
-          });
-          arr.push(int);
+        for (let j = 0; j < 2; j++) {
+          values.splice(j, 1, randomizeIntegers()).sort();
         }
-
-        integers = arr;
+      } else if (btnUIState.setValues === "range") {
+        values = randomizeIntegers({ min: setValues[0], max: setValues[1] });
       }
 
       if (btnUIState.setOfIntegers === "custom") {
-        let arr = [];
-        for (let k = 0; k < setOfIntegersCustom; k++) {
-          let [int] = randomizeIntegers({
-            min: values.min,
-            max: values.max,
-          });
-          arr.push(int);
+        const arr = [];
+
+        if (btnUIState.setValues === "range") {
+          arr.push(randomizeIntegers({ min: values[0], max: values[1] }));
+          integers = arr;
+          return;
+        }
+
+        for (let k = 0; k < setOfIntegers; k++) {
+          arr.push(randomizeIntegers());
         }
 
         integers = arr;

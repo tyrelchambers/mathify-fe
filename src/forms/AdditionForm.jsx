@@ -18,9 +18,11 @@ export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
           className="form-input"
           name="numOfQuestions"
           placeholder="0"
-          value={state.numOfQuestions}
           onChange={(e) =>
-            dispatch({ type: "updateNumOfQuestions", payload: e.target.value })
+            dispatch({
+              type: "updateNumOfQuestions",
+              payload: e.target.value,
+            })
           }
         />
       </div>

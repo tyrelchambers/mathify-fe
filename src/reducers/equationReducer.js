@@ -9,29 +9,35 @@ export const equationReducer = (state, action) => {
       };
     case "updateSetOfIntegers":
       if (state.btnUIState.setOfIntegers === "range") {
+        const arr = { ...state };
+        if (action.elem === "setOfIntegers_min") {
+          arr.setOfIntegers.splice(0, 1, action.payload);
+        } else if (action.elem === "setOfIntegers_max") {
+          arr.setOfIntegers.splice(1, 1, action.payload);
+        }
+
         return {
-          ...state,
-          setOfIntegers: {
-            ...state.setOfIntegers,
-            ...action.payload,
-          },
+          ...arr,
         };
       }
 
       if (state.btnUIState.setOfIntegers === "custom") {
         return {
           ...state,
-          setOfIntegers: action.payload,
+          setOfIntegers: [action.payload],
         };
       }
       break;
     case "updateSetValues":
+      const arr = { ...state };
+      if (action.elem === "setValues_min") {
+        arr.setValues.splice(0, 1, action.payload).sort();
+      } else if (action.elem === "setValues_max") {
+        arr.setValues.splice(1, 1, action.payload).sort();
+      }
+
       return {
-        ...state,
-        setValues: {
-          ...state.setValues,
-          ...action.payload,
-        },
+        ...arr,
       };
 
     case "updateSetValuesUI":
@@ -55,19 +61,13 @@ export const equationReducer = (state, action) => {
     case "resetSetOfIntegers":
       return {
         ...state,
-        setOfIntegers: {
-          min: 0,
-          max: 0,
-        },
+        setOfIntegers: [],
       };
 
     case "resetSetValues":
       return {
         ...state,
-        setValues: {
-          min: 0,
-          max: 0,
-        },
+        setValues: [],
       };
 
     default:
