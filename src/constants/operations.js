@@ -1,3 +1,5 @@
+import React from "react";
+
 export const operations = {
-  addition: "-",
+  addition: <i className="fas fa-minus"></i>,
 };

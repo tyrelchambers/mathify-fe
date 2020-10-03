@@ -7,12 +7,12 @@ import { AdditionForm } from "../../forms/AdditionForm";
 import { equationReducer } from "../../reducers/equationReducer";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
-import { createIntegerSet, randomizeIntegers } from "./calculations";
+import { randomizeIntegers } from "./calculations";
 import { defaultState } from "./defaultState";
 
 export const EquationWrapper = () => {
   const { equation } = useParams();
-
+  const [equationSets, setEquationSets] = useState([]);
   const [state, dispatch] = useReducer(equationReducer, defaultState);
 
   if (!acceptedEquationRoutes.includes(equation)) {
@@ -53,25 +53,34 @@ export const EquationWrapper = () => {
       }
 
       if (btnUIState.setOfIntegers === "range") {
-        const ints = randomizeIntegers({
-          type: "range",
+        let [timesToLoop] = randomizeIntegers({
+          min: rangeSetOfIntegersMin,
+          max: rangeSetOfIntegersMax,
         });
 
-        integers = {
-          min: ints.min,
-          max: ints.max,
-        };
-      } else if (btnUIState.setOfIntegers === "custom") {
+        let arr = [];
+
+        for (let k = 0; k < timesToLoop; k++) {
+          let [int] = randomizeIntegers({
+            min: values.min,
+            max: values.max,
+          });
+          arr.push(int);
+        }
+
+        integers = arr;
+      }
+
+      if (btnUIState.setOfIntegers === "custom") {
         let arr = [];
         for (let k = 0; k < setOfIntegersCustom; k++) {
-          arr.push(
-            createIntegerSet({
-              min: values.min,
-              max: values.max,
-            })
-          );
+          let [int] = randomizeIntegers({
+            min: values.min,
+            max: values.max,
+          });
+          arr.push(int);
         }
-        console.log(arr);
+
         integers = arr;
       }
 
@@ -81,7 +90,7 @@ export const EquationWrapper = () => {
       });
     }
 
-    console.log(equations, integers);
+    setEquationSets(equations);
   };
 
   const defaultProps = {
@@ -102,7 +111,7 @@ export const EquationWrapper = () => {
       <div className="flex">
         <div className="w-3/5">{forms[equation]}</div>
         <div className="w-full">
-          <EqPreview state={state} />
+          <EqPreview state={equationSets} />
         </div>
       </div>
     </DisplayWrapper>
