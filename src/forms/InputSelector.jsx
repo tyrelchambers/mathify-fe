@@ -9,6 +9,8 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
           name={stateKey}
           className="form-input mt-4"
           placeholder="0"
+          min="0"
+          max="1000"
           onChange={(e) =>
             dispatch({ type: dispatchType, payload: e.target.value })
           }
@@ -23,6 +25,8 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
             name={`${stateKey}_min`}
             className="form-input"
             placeholder="0"
+            min="0"
+            max="1000"
             onChange={(e) =>
               dispatch({
                 type: dispatchType,
@@ -40,6 +44,8 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
             name={`${stateKey}_max`}
             className="form-input"
             placeholder="0"
+            min="0"
+            max="1000"
             onChange={(e) =>
               dispatch({
                 type: dispatchType,

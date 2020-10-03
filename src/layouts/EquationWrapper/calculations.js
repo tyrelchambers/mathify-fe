@@ -1,21 +1,12 @@
 import React from "react";
 
-// returns a random min and max of integers if type === range else it returns an array of randoms
 const randomizeIntegers = ({ min = 0, max = 1000 } = {}) => {
-  let range = [];
+  let minNum = Math.floor(min);
+  let minMax = Math.ceil(max);
 
-  const calcMin = () => {
-    let int = Math.floor(Math.random() * (max - min + 1) + min);
-    if (int > max || int < min) {
-      return calcMin();
-    }
+  let num = Math.floor(Math.random() * (minMax - minNum + 1)) + minNum;
 
-    return int;
-  };
-
-  range.push(calcMin());
-
-  return range;
+  return num < min || num > max ? randomizeIntegers() : [num];
 };
 
 export { randomizeIntegers };
