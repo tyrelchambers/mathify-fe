@@ -1,10 +1,14 @@
 import React from "react";
 
-export const Equation = ({ numOfQuestions, setOfIntegers, setValues }) => {
+export const Equation = ({
+  numberOfQuestions,
+  numberOfDigitsPerEquation,
+  digitValues,
+}) => {
   const results = [];
 
-  for (let i = 0; i < numOfQuestions; i++) {
-    results.push(<p>{setValues}</p>);
+  for (let i = 0; i < numberOfQuestions; i++) {
+    results.push(<p>{digitValues}</p>);
   }
 
   return <div> {results.map((r) => r)}</div>;

@@ -5,15 +5,16 @@ export const equationReducer = (state, action) => {
     case "updateNumOfQuestions":
       return {
         ...state,
-        numOfQuestions: action.payload,
+        numberOfQuestions: action.payload,
       };
-    case "updateSetOfIntegers":
-      if (state.btnUIState.setOfIntegers === "range") {
+
+    case "updateNumberOfDigitsPerEquation":
+      if (state.formUIState.numberOfDigitsPerEquation === "range") {
         const arr = { ...state };
-        if (action.elem === "setOfIntegers_min") {
-          arr.setOfIntegers.splice(0, 1, action.payload);
-        } else if (action.elem === "setOfIntegers_max") {
-          arr.setOfIntegers.splice(1, 1, action.payload);
+        if (action.elem === "numberOfDigitsPerEquation_min") {
+          arr.logicState.numberOfDigitsPerEquation.splice(0, 1, action.payload);
+        } else if (action.elem === "numberOfDigitsPerEquation_max") {
+          arr.logicState.numberOfDigitsPerEquation.splice(1, 1, action.payload);
         }
 
         return {
@@ -21,53 +22,60 @@ export const equationReducer = (state, action) => {
         };
       }
 
-      if (state.btnUIState.setOfIntegers === "custom") {
+      if (state.formUIState.numberOfDigitsPerEquation === "custom") {
         return {
           ...state,
-          setOfIntegers: [action.payload],
+          logicState: {
+            numberOfDigitsPerEquation: [action.payload],
+          },
         };
       }
       break;
-    case "updateSetValues":
+
+    case "updateDigitValues":
       const arr = { ...state };
-      if (action.elem === "setValues_min") {
-        arr.setValues.splice(0, 1, action.payload).sort();
-      } else if (action.elem === "setValues_max") {
-        arr.setValues.splice(1, 1, action.payload).sort();
+      if (action.elem === "digitValues_min") {
+        arr.logicState.digitValues.splice(0, 1, action.payload).sort();
+      } else if (action.elem === "digitValues_max") {
+        arr.logicState.digitValues.splice(1, 1, action.payload).sort();
       }
 
       return {
         ...arr,
       };
 
-    case "updateSetValuesUI":
+    case "updateDigitValuesUI":
       return {
         ...state,
-        btnUIState: {
-          ...state.btnUIState,
-          setValues: action.payload,
+        formUIState: {
+          ...state.formUIState,
+          digitValues: action.payload,
         },
       };
 
-    case "updateSetOfIntegersUI":
+    case "updateNumberOfDigitsPerEquationUI":
       return {
         ...state,
-        btnUIState: {
-          ...state.btnUIState,
-          setOfIntegers: action.payload,
+        formUIState: {
+          ...state.formUIState,
+          numberOfDigitsPerEquation: action.payload,
         },
       };
 
-    case "resetSetOfIntegers":
+    case "resetNumberOfDigitsPerEquation":
       return {
         ...state,
-        setOfIntegers: [],
+        logicState: {
+          numberOfDigitsPerEquation: [],
+        },
       };
 
-    case "resetSetValues":
+    case "resetDigitValues":
       return {
         ...state,
-        setValues: [],
+        logicState: {
+          digitValues: [],
+        },
       };
 
     default:

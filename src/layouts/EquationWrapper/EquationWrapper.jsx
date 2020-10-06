@@ -8,58 +8,21 @@ import { equationReducer } from "../../reducers/equationReducer";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
 import { randomizeIntegers } from "./calculations";
-import { defaultState } from "./defaultState";
+import { logicState, formUIState } from "./defaultState";
 
 export const EquationWrapper = () => {
   const { equation } = useParams();
   const [equationSets, setEquationSets] = useState([]);
-  const [state, dispatch] = useReducer(equationReducer, defaultState);
+  const [state, dispatch] = useReducer(equationReducer, {
+    logicState,
+    formUIState,
+  });
 
   if (!acceptedEquationRoutes.includes(equation)) {
     return null;
   }
 
-  const generateWorksheet = () => {
-    const { btnUIState, setValues, setOfIntegers, numOfQuestions } = state;
-    let values = [],
-      integers = [];
-    const equations = [];
-
-    console.log(state);
-
-    for (let i = 0; i < numOfQuestions; i++) {
-      if (btnUIState.setValues === "randomize") {
-        for (let j = 0; j < 2; j++) {
-          values.splice(j, 1, randomizeIntegers()).sort();
-        }
-      } else if (btnUIState.setValues === "range") {
-        values = randomizeIntegers({ min: setValues[0], max: setValues[1] });
-      }
-
-      if (btnUIState.setOfIntegers === "custom") {
-        const arr = [];
-
-        if (btnUIState.setValues === "range") {
-          arr.push(randomizeIntegers({ min: values[0], max: values[1] }));
-          integers = arr;
-          return;
-        }
-
-        for (let k = 0; k < setOfIntegers; k++) {
-          arr.push(randomizeIntegers());
-        }
-
-        integers = arr;
-      }
-
-      equations.push({
-        symbol: operations[equation],
-        digits: integers,
-      });
-    }
-
-    setEquationSets(equations);
-  };
+  const generateWorksheet = () => {};
 
   const defaultProps = {
     state,

@@ -1,7 +1,7 @@
 import React from "react";
 
 export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
-  switch (state.btnUIState[stateKey]) {
+  switch (state.formUIState[stateKey]) {
     case "custom":
       return (
         <input

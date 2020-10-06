@@ -11,6 +11,7 @@ import { additionOps } from "../layouts/EquationWrapper/options.ui";
 export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
   return (
     <form className="form">
+      {console.log(state)}
       <div className="field-group">
         <FormLabel forName="numOfQuestions" label="Number of Questions?" />
         <input
@@ -29,19 +30,19 @@ export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
 
       <div className="field-group">
         <FormLabel
-          forName="setValues"
+          forName="digitValues"
           label="What numbers do you want to work with?"
         />
 
         <div className="flex mt-2">
-          {additionOps.setValues.map((op) => (
+          {additionOps.digitValues.map((op) => (
             <PrimaryButton
               onClick={() => {
-                dispatch({ type: "updateSetValuesUI", payload: op.name });
-                dispatch({ type: "resetSetValues", payload: op.name });
+                dispatch({ type: "updateDigitValuesUI", payload: op.name });
+                dispatch({ type: "resetDigitValues", payload: op.name });
               }}
               classes={`${
-                state.btnUIState.setValues === op.name ? "active" : ""
+                state.formUIState.digitValues === op.name ? "active" : ""
               }`}
               key={op.label}
               onChange={dispatch}
@@ -53,25 +54,33 @@ export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
         <InputSelector
           dispatch={dispatch}
           state={state}
-          dispatchType="updateSetValues"
-          stateKey="setValues"
+          dispatchType="updateDigitValues"
+          stateKey="digitValues"
         />
       </div>
 
       <div className="field-group">
         <FormLabel
-          forName="setOfIntegers"
+          forName="numberOfDigitsPerEquation"
           label="How many integers per question?"
         />
         <div className="flex mt-2">
-          {additionOps.setOfIntegers.map((op) => (
+          {additionOps.numberOfDigitsPerEquation.map((op) => (
             <PrimaryButton
               onClick={() => {
-                dispatch({ type: "updateSetOfIntegersUI", payload: op.name });
-                dispatch({ type: "resetSetOfIntegers", payload: op.name });
+                dispatch({
+                  type: "updateNumberOfDigitsPerEquationUI",
+                  payload: op.name,
+                });
+                dispatch({
+                  type: "resetNumberOfDigitsPerEquation",
+                  payload: op.name,
+                });
               }}
               classes={`${
-                state.btnUIState.setOfIntegers === op.name ? "active" : ""
+                state.formUIState.numberOfDigitsPerEquation === op.name
+                  ? "active"
+                  : ""
               }`}
               key={op.label}
               onChange={dispatch}
@@ -83,8 +92,8 @@ export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
         <InputSelector
           dispatch={dispatch}
           state={state}
-          dispatchType="updateSetOfIntegers"
-          stateKey="setOfIntegers"
+          dispatchType="updateNumberOfDigitsPerEquation"
+          stateKey="numberOfDigitsPerEquation"
         />
       </div>
 

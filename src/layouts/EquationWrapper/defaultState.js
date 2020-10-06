@@ -1,9 +1,10 @@
-export const defaultState = {
-  numOfQuestions: 0,
-  setOfIntegers: [],
-  setValues: [],
-  btnUIState: {
-    setOfIntegers: "",
-    setValues: "",
-  },
+export const logicState = {
+  numberOfQuestions: 0,
+  numberOfDigitsPerEquation: [],
+  digitalValues: [],
+};
+
+export const formUIState = {
+  numberOfDigitsPerEquation: "",
+  digitValues: "",
 };
