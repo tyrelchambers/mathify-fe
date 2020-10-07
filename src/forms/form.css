@@ -10,6 +10,7 @@
   font-weight: bold;
   color: var(--gray-800);
   margin-bottom: 0.5em;
+  width: fit-content;
 }
 
 .form-input {

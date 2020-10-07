@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  PrimaryButton,
-  SubmitButton,
-} from "../components/Buttons/PrimaryButton";
+import { PrimaryButton } from "../components/Buttons/PrimaryButton";
 import { FormLabel } from "../components/FormLabel/FormLabel";
 import "./form.css";
 import { InputSelector } from "./InputSelector";
@@ -12,7 +9,15 @@ const CommonForm = ({ state, dispatch }) => {
   return (
     <form className="form">
       <div className="field-group">
-        <FormLabel forName="numOfQuestions" label="Number of Questions?" />
+        <FormLabel
+          forName="numOfQuestions"
+          label="Number of Questions?"
+          hasTooltip
+          toolTipText={`This is the total number of questions you want on your worksheet
+
+            Minimum of 1 question.
+          `}
+        />
         <input
           type="number"
           className="form-input"
@@ -31,6 +36,11 @@ const CommonForm = ({ state, dispatch }) => {
         <FormLabel
           forName="digitValues"
           label="What numbers do you want to work with?"
+          hasTooltip
+          toolTipText={`Choose which numbers you want in each equation. For example: 1 x 5 or 124 x 600.
+
+            The randomize default is min: 0 and max: 1000
+          `}
         />
 
         <div className="flex mt-2">
@@ -62,6 +72,8 @@ const CommonForm = ({ state, dispatch }) => {
         <FormLabel
           forName="numberOfDigitsPerEquation"
           label="How many integers per question?"
+          hasTooltip
+          toolTipText="This determines the number of digits per individual question."
         />
         <div className="flex mt-2">
           {additionOps.numberOfDigitsPerEquation.map((op) => (

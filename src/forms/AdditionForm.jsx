@@ -6,10 +6,7 @@ import {
   logicState,
   formUIState,
 } from "../layouts/EquationWrapper/defaultState";
-import {
-  Equation,
-  randomizeIntegers,
-} from "../layouts/EquationWrapper/calculations";
+import { randomizeIntegers } from "../layouts/EquationWrapper/calculations";
 export const AdditionForm = (props) => {
   const [state, dispatch] = useReducer(equationReducer, {
     logicState,

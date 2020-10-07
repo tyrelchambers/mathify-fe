@@ -9,29 +9,4 @@ const randomizeIntegers = ({ min = 0, max = 1000 } = {}) => {
   return num < min || num > max ? randomizeIntegers() : num;
 };
 
-class Equation {
-  digitValue = "";
-  numberOfDigits = "";
-  operation = "";
-
-  addDigitValue(digitValue) {
-    this.digitValue = digitValue;
-  }
-
-  addNumberOfDigits(number) {
-    this.numberOfDigits = number;
-  }
-
-  addOperation(operation) {
-    this.operation = operation;
-  }
-
-  getEquation() {
-    return {
-      operation: this.operation,
-      values: [],
-    };
-  }
-}
-
-export { randomizeIntegers, Equation };
+export { randomizeIntegers };

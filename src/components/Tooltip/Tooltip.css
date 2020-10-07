@@ -1,0 +1,10 @@
+.tooltip-body {
+  display: flex;
+  width: 300px;
+  color: var(--white);
+  z-index: 99;
+}
+
+.tooltip-text {
+  white-space: pre-line;
+}
