@@ -6,14 +6,19 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { EQUATION, HOME } from "./routes/routes";
 import { Home } from "./pages/Home/Home";
 import "./assets/main.css";
-import { EquationWrapper } from "./layouts/EquationWrapper/EquationWrapper";
+import EquationWrapper from "./layouts/EquationWrapper/EquationWrapper";
+import { Provider } from "mobx-react";
+import * as stores from "./stores/index";
+
 const AppWrapper = () => {
   return (
     <Router basename="/">
-      <Switch>
-        <Route exact path={HOME} component={Home} />
-        <Route exact path={EQUATION} component={EquationWrapper} />
-      </Switch>
+      <Provider {...stores}>
+        <Switch>
+          <Route exact path={HOME} component={Home} />
+          <Route exact path={EQUATION} component={EquationWrapper} />
+        </Switch>
+      </Provider>
     </Router>
   );
 };

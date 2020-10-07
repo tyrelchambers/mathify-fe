@@ -5,7 +5,10 @@ export const equationReducer = (state, action) => {
     case "updateNumOfQuestions":
       return {
         ...state,
-        numberOfQuestions: action.payload,
+        logicState: {
+          ...state.logicState,
+          numberOfQuestions: action.payload,
+        },
       };
 
     case "updateNumberOfDigitsPerEquation":
@@ -26,6 +29,8 @@ export const equationReducer = (state, action) => {
         return {
           ...state,
           logicState: {
+            ...state.logicState,
+
             numberOfDigitsPerEquation: [action.payload],
           },
         };
@@ -66,6 +71,8 @@ export const equationReducer = (state, action) => {
       return {
         ...state,
         logicState: {
+          ...state.logicState,
+
           numberOfDigitsPerEquation: [],
         },
       };
@@ -74,6 +81,8 @@ export const equationReducer = (state, action) => {
       return {
         ...state,
         logicState: {
+          ...state.logicState,
+
           digitValues: [],
         },
       };

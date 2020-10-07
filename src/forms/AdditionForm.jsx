@@ -1,106 +1,78 @@
-import React from "react";
+import React, { useReducer } from "react";
+import { SubmitButton } from "../components/Buttons/PrimaryButton";
+import { equationReducer } from "../reducers/equationReducer";
+import CommonForm from "./CommonForm";
 import {
-  PrimaryButton,
-  SubmitButton,
-} from "../components/Buttons/PrimaryButton";
-import { FormLabel } from "../components/FormLabel/FormLabel";
-import "./form.css";
-import { InputSelector } from "./InputSelector";
-import { additionOps } from "../layouts/EquationWrapper/options.ui";
+  logicState,
+  formUIState,
+} from "../layouts/EquationWrapper/defaultState";
+import {
+  Equation,
+  randomizeIntegers,
+} from "../layouts/EquationWrapper/calculations";
+export const AdditionForm = (props) => {
+  const [state, dispatch] = useReducer(equationReducer, {
+    logicState,
+    formUIState,
+  });
 
-export const AdditionForm = ({ state, dispatch, generateWorksheet }) => {
-  return (
-    <form className="form">
-      {console.log(state)}
-      <div className="field-group">
-        <FormLabel forName="numOfQuestions" label="Number of Questions?" />
-        <input
-          type="number"
-          className="form-input"
-          name="numOfQuestions"
-          placeholder="0"
-          onChange={(e) =>
-            dispatch({
-              type: "updateNumOfQuestions",
-              payload: e.target.value,
+  const generateWorksheet = () => {
+    let digits = [];
+    let digitValues = [];
+    const equations = [];
+
+    for (let index = 0; index < state.logicState.numberOfQuestions; index++) {
+      if (state.formUIState.digitValues === "randomize") {
+        for (let j = 0; j < 2; j++) {
+          let numbers = randomizeIntegers();
+          digitValues.splice(j, 1, numbers);
+        }
+      } else if (state.formUIState.digitValues === "range") {
+        digitValues.splice(0, 1, state.logicState.digitValues[0]);
+        digitValues.splice(1, 1, state.logicState.digitValues[1]);
+      }
+      if (state.formUIState.numberOfDigitsPerEquation === "custom") {
+        for (let j = 0; j < state.logicState.numberOfDigitsPerEquation; j++) {
+          digits.push(
+            randomizeIntegers({
+              min: digitValues[0],
+              max: digitValues[1],
             })
-          }
-        />
-      </div>
+          );
+        }
+      } else if (state.formUIState.numberOfDigitsPerEquation === "range") {
+        const digitsCount = randomizeIntegers({
+          min: state.logicState.numberOfDigitsPerEquation[0],
+          max: state.logicState.numberOfDigitsPerEquation[1],
+        });
 
-      <div className="field-group">
-        <FormLabel
-          forName="digitValues"
-          label="What numbers do you want to work with?"
-        />
+        for (let j = 0; j < digitsCount; j++) {
+          digits.push(
+            randomizeIntegers({
+              min: digitValues[0],
+              max: digitValues[1],
+            })
+          );
+        }
+      }
 
-        <div className="flex mt-2">
-          {additionOps.digitValues.map((op) => (
-            <PrimaryButton
-              onClick={() => {
-                dispatch({ type: "updateDigitValuesUI", payload: op.name });
-                dispatch({ type: "resetDigitValues", payload: op.name });
-              }}
-              classes={`${
-                state.formUIState.digitValues === op.name ? "active" : ""
-              }`}
-              key={op.label}
-              onChange={dispatch}
-            >
-              {op.label}
-            </PrimaryButton>
-          ))}
-        </div>
-        <InputSelector
-          dispatch={dispatch}
-          state={state}
-          dispatchType="updateDigitValues"
-          stateKey="digitValues"
-        />
-      </div>
+      equations.push({
+        digits,
+        operation: props.equation,
+      });
+      digits = [];
+      digitValues = [];
+    }
 
-      <div className="field-group">
-        <FormLabel
-          forName="numberOfDigitsPerEquation"
-          label="How many integers per question?"
-        />
-        <div className="flex mt-2">
-          {additionOps.numberOfDigitsPerEquation.map((op) => (
-            <PrimaryButton
-              onClick={() => {
-                dispatch({
-                  type: "updateNumberOfDigitsPerEquationUI",
-                  payload: op.name,
-                });
-                dispatch({
-                  type: "resetNumberOfDigitsPerEquation",
-                  payload: op.name,
-                });
-              }}
-              classes={`${
-                state.formUIState.numberOfDigitsPerEquation === op.name
-                  ? "active"
-                  : ""
-              }`}
-              key={op.label}
-              onChange={dispatch}
-            >
-              {op.label}
-            </PrimaryButton>
-          ))}
-        </div>
-        <InputSelector
-          dispatch={dispatch}
-          state={state}
-          dispatchType="updateNumberOfDigitsPerEquation"
-          stateKey="numberOfDigitsPerEquation"
-        />
-      </div>
-
+    props.setEquationSets(equations);
+  };
+  return (
+    <>
+      <CommonForm {...props} state={state} dispatch={dispatch} />
       <SubmitButton classes="shadow-lg" onClick={generateWorksheet}>
         <i className="fas fa-angle-double-right mr-4"></i>
         Generate
       </SubmitButton>
-    </form>
+    </>
   );
 };

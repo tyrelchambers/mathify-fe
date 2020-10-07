@@ -1,35 +1,23 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { EqPreview } from "../../components/EqPreview/EqPreview";
 import { H2 } from "../../components/Headings/Headings";
-import { operations } from "../../constants/operations";
 import { AdditionForm } from "../../forms/AdditionForm";
-import { equationReducer } from "../../reducers/equationReducer";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
-import { randomizeIntegers } from "./calculations";
-import { logicState, formUIState } from "./defaultState";
 
-export const EquationWrapper = () => {
+const EquationWrapper = () => {
   const { equation } = useParams();
   const [equationSets, setEquationSets] = useState([]);
-  const [state, dispatch] = useReducer(equationReducer, {
-    logicState,
-    formUIState,
-  });
 
   if (!acceptedEquationRoutes.includes(equation)) {
     return null;
   }
 
-  const generateWorksheet = () => {};
-
   const defaultProps = {
-    state,
-    generateWorksheet,
-    dispatch,
+    setEquationSets,
+    equation,
   };
-
   const forms = {
     addition: <AdditionForm {...defaultProps} />,
   };
@@ -48,3 +36,5 @@ export const EquationWrapper = () => {
     </DisplayWrapper>
   );
 };
+
+export default EquationWrapper;
