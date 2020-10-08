@@ -5,10 +5,12 @@ import { H2 } from "../../components/Headings/Headings";
 import { AdditionForm } from "../../forms/AdditionForm";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
+import { useForm } from "react-hook-form";
 
 const EquationWrapper = () => {
   const { equation } = useParams();
   const [equationSets, setEquationSets] = useState([]);
+  const { register, handleSubmit, errors } = useForm();
 
   if (!acceptedEquationRoutes.includes(equation)) {
     return null;
@@ -17,6 +19,9 @@ const EquationWrapper = () => {
   const defaultProps = {
     setEquationSets,
     equation,
+    register,
+    errors,
+    handleSubmit,
   };
   const forms = {
     addition: <AdditionForm {...defaultProps} />,

@@ -1,10 +1,17 @@
 import React from "react";
 
-export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
+export const InputSelector = ({
+  stateKey,
+  dispatch,
+  state,
+  dispatchType,
+  inputRef,
+}) => {
   switch (state.formUIState[stateKey]) {
     case "custom":
       return (
         <input
+          ref={inputRef}
           type="number"
           name={stateKey}
           className="form-input mt-4"
@@ -21,6 +28,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
       return (
         <div className="flex items-center mt-4">
           <input
+            ref={inputRef}
             type="number"
             name={`${stateKey}_min`}
             className="form-input"
@@ -39,6 +47,7 @@ export const InputSelector = ({ stateKey, dispatch, state, dispatchType }) => {
           <p className="ml-2 mr-2 text-gray-700 font-bold">to</p>
 
           <input
+            ref={inputRef}
             type="number"
             name={`${stateKey}_max`}
             className="form-input"

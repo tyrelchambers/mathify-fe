@@ -4,10 +4,11 @@ import { FormLabel } from "../components/FormLabel/FormLabel";
 import "./form.css";
 import { InputSelector } from "./InputSelector";
 import { additionOps } from "../layouts/EquationWrapper/options.ui";
+import FormError from "../components/FormError/FormError";
 
-const CommonForm = ({ state, dispatch }) => {
+const CommonForm = ({ state, dispatch, register, errors }) => {
   return (
-    <form className="form">
+    <>
       <div className="field-group">
         <FormLabel
           forName="numOfQuestions"
@@ -18,11 +19,20 @@ const CommonForm = ({ state, dispatch }) => {
             Minimum of 1 question.
           `}
         />
+
         <input
+          ref={register({
+            min: {
+              value: 1,
+              message: "Number of questions must be over 1",
+            },
+            required: "Number of questions is required",
+          })}
           type="number"
           className="form-input"
           name="numOfQuestions"
           placeholder="0"
+          min="0"
           onChange={(e) =>
             dispatch({
               type: "updateNumOfQuestions",
@@ -30,6 +40,10 @@ const CommonForm = ({ state, dispatch }) => {
             })
           }
         />
+        {console.log(errors)}
+        {errors.numOfQuestions && (
+          <FormError error={errors.numOfQuestions.message} />
+        )}
       </div>
 
       <div className="field-group">
@@ -65,6 +79,7 @@ const CommonForm = ({ state, dispatch }) => {
           state={state}
           dispatchType="updateDigitValues"
           stateKey="digitValues"
+          inputRef={register}
         />
       </div>
 
@@ -105,9 +120,10 @@ const CommonForm = ({ state, dispatch }) => {
           state={state}
           dispatchType="updateNumberOfDigitsPerEquation"
           stateKey="numberOfDigitsPerEquation"
+          inputRef={register}
         />
       </div>
-    </form>
+    </>
   );
 };
 

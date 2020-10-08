@@ -7,6 +7,7 @@ import {
   formUIState,
 } from "../layouts/EquationWrapper/defaultState";
 import { randomizeIntegers } from "../layouts/EquationWrapper/calculations";
+
 export const AdditionForm = (props) => {
   const [state, dispatch] = useReducer(equationReducer, {
     logicState,
@@ -63,13 +64,15 @@ export const AdditionForm = (props) => {
 
     props.setEquationSets(equations);
   };
+
+  const submit = props.handleSubmit;
   return (
-    <>
+    <form className="form mr-4" onSubmit={submit(generateWorksheet)}>
       <CommonForm {...props} state={state} dispatch={dispatch} />
-      <SubmitButton classes="shadow-lg" onClick={generateWorksheet}>
+      <SubmitButton type="submit" classes="shadow-lg">
         <i className="fas fa-angle-double-right mr-4"></i>
         Generate
       </SubmitButton>
-    </>
+    </form>
   );
 };
