@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { EqPreview } from "../../components/EqPreview/EqPreview";
 import { H2 } from "../../components/Headings/Headings";
-import { AdditionForm } from "../../forms/AdditionForm";
+import AdditionForm from "../../forms/AdditionForm";
 import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
 import { useForm } from "react-hook-form";
