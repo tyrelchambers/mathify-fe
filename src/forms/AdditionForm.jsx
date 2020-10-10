@@ -28,6 +28,7 @@ export const AdditionForm = (props) => {
       } else if (state.formUIState.digitValues === "range") {
         digitValues.splice(0, 1, state.logicState.digitValues[0]);
         digitValues.splice(1, 1, state.logicState.digitValues[1]);
+        digitValues.sort();
       }
       if (state.formUIState.numberOfDigitsPerEquation === "custom") {
         for (let j = 0; j < state.logicState.numberOfDigitsPerEquation; j++) {
@@ -53,6 +54,8 @@ export const AdditionForm = (props) => {
           );
         }
       }
+
+      console.log(digits, digitValues);
 
       equations.push({
         digits,

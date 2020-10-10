@@ -20,6 +20,8 @@ export const equationReducer = (state, action) => {
           arr.logicState.numberOfDigitsPerEquation.splice(1, 1, action.payload);
         }
 
+        arr.logicState.numberOfDigitsPerEquation.sort();
+
         return {
           ...arr,
         };
