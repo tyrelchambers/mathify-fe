@@ -11,7 +11,13 @@ export const InputSelector = ({
     case "custom":
       return (
         <input
-          ref={inputRef}
+          ref={inputRef({
+            required: "Please enter a value",
+            min: {
+              value: 1,
+              message: "Please enter a value greater than 1",
+            },
+          })}
           type="number"
           name={stateKey}
           className="form-input mt-4"
@@ -28,7 +34,13 @@ export const InputSelector = ({
       return (
         <div className="flex items-center mt-4">
           <input
-            ref={inputRef}
+            ref={inputRef({
+              required: "Please enter a value",
+              min: {
+                value: 1,
+                message: "Please enter a value greater than 1",
+              },
+            })}
             type="number"
             name={`${stateKey}_min`}
             className="form-input"

@@ -40,7 +40,6 @@ const CommonForm = ({ state, dispatch, register, errors }) => {
             })
           }
         />
-        {console.log(errors)}
         {errors.numOfQuestions && (
           <FormError error={errors.numOfQuestions.message} />
         )}
@@ -81,6 +80,13 @@ const CommonForm = ({ state, dispatch, register, errors }) => {
           stateKey="digitValues"
           inputRef={register}
         />
+        {errors.digitValues_min && (
+          <FormError error={errors.digitValues_min.message} />
+        )}
+        {errors.digitValues_max && (
+          <FormError error={errors.digitValues_max.message} />
+        )}
+        {errors.digitValues && <FormError error={errors.digitValues.message} />}
       </div>
 
       <div className="field-group">
@@ -122,6 +128,15 @@ const CommonForm = ({ state, dispatch, register, errors }) => {
           stateKey="numberOfDigitsPerEquation"
           inputRef={register}
         />
+        {errors.numberOfDigitsPerEquation_min && (
+          <FormError error={errors.numberOfDigitsPerEquation_min.message} />
+        )}
+        {errors.numberOfDigitsPerEquation_max && (
+          <FormError error={errors.numberOfDigitsPerEquation_max.message} />
+        )}
+        {errors.numberOfDigitsPerEquation && (
+          <FormError error={errors.numberOfDigitsPerEquation.message} />
+        )}
       </div>
     </>
   );
