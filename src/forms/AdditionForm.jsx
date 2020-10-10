@@ -55,8 +55,6 @@ export const AdditionForm = (props) => {
         }
       }
 
-      console.log(digits, digitValues);
-
       equations.push({
         digits,
         operation: props.equation,
