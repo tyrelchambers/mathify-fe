@@ -4,7 +4,6 @@ import withCommonInputs from "../components/withCommonInputs/withCommonInputs";
 import CommonForm from "./CommonForm";
 
 const AdditionForm = (props) => {
-  console.log(props);
   const submit = props.handleSubmit;
   return (
     <form className="form mr-4" onSubmit={submit(props.generateWorksheet)}>
