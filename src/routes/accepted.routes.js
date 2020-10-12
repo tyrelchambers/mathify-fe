@@ -1,7 +1,1 @@
-export const acceptedEquationRoutes = [
-  "fractions",
-  "decimals",
-  "addition",
-  "subtraction",
-  "percentages",
-];
+export const acceptedEquationRoutes = ["decimals", "addition", "subtraction"];
