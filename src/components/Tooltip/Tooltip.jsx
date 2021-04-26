@@ -13,7 +13,7 @@ const Tooltip = (props) => {
         top: 0,
       }}
     >
-      <p className="tooltip-text">{props.children}</p>
+      <p className="tooltip-text text-white">{props.children}</p>
     </div>
   );
 };

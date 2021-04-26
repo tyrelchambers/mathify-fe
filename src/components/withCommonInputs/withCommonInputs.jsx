@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import {
   logicState,
   formUIState,
+  optionsState,
 } from "../../layouts/EquationWrapper/defaultState";
 import { randomizeIntegers } from "../../layouts/EquationWrapper/calculations";
 import { equationReducer } from "../../reducers/equationReducer";
@@ -10,6 +11,7 @@ const withCommonInputs = (Component) => (props) => {
   const [state, dispatch] = useReducer(equationReducer, {
     logicState,
     formUIState,
+    optionsState,
   });
 
   const generateWorksheet = () => {

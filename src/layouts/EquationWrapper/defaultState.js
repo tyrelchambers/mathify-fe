@@ -8,3 +8,7 @@ export const formUIState = {
   numberOfDigitsPerEquation: "",
   digitValues: "",
 };
+
+export const optionsState = {
+  includeAnswers: false,
+};

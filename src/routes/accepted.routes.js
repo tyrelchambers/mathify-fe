@@ -1,1 +1,7 @@
-export const acceptedEquationRoutes = ["decimals", "addition", "subtraction"];
+export const acceptedEquationRoutes = [
+  "decimals",
+  "addition",
+  "subtraction",
+  "multiplication",
+  "division",
+];

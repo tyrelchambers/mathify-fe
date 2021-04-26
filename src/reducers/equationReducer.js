@@ -89,6 +89,15 @@ export const equationReducer = (state, action) => {
         },
       };
 
+    case "answerSheet":
+      return {
+        ...state,
+        optionsState: {
+          ...state.optionsState,
+          includeAnswers: action.payload,
+        },
+      };
+
     default:
       return new Error();
   }

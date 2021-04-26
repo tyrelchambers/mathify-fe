@@ -13,4 +13,12 @@ export const topics = [
     slug: BASE + "/subtraction",
     label: "Subtraction",
   },
+  {
+    slug: BASE + "/multiplication",
+    label: "Multiplication",
+  },
+  {
+    slug: BASE + "/division",
+    label: "Division",
+  },
 ];

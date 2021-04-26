@@ -74,6 +74,10 @@
   --hr: rgb(85%, 85%, 85%);
 }
 
+p {
+  color: var(--gray-800);
+}
+
 .box-shadow {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }

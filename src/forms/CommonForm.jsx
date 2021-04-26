@@ -92,9 +92,9 @@ const CommonForm = ({ state, dispatch, register, errors }) => {
       <div className="field-group">
         <FormLabel
           forName="numberOfDigitsPerEquation"
-          label="How many integers per question?"
+          label="How many sets of numbers per question?"
           hasTooltip
-          toolTipText="This determines the number of digits per individual question."
+          toolTipText="This determines the number of sets of numbers per individual question."
         />
         <div className="flex mt-2">
           {additionOps.numberOfDigitsPerEquation.map((op) => (
@@ -137,6 +137,23 @@ const CommonForm = ({ state, dispatch, register, errors }) => {
         {errors.numberOfDigitsPerEquation && (
           <FormError error={errors.numberOfDigitsPerEquation.message} />
         )}
+      </div>
+      <div className="field-group">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="includeAnswers"
+            className="mr-2"
+            value={state.optionsState.includeAnswers}
+            onChange={(e) =>
+              dispatch({
+                type: "answerSheet",
+                payload: e.target.checked,
+              })
+            }
+          />
+          <p className="font-bold">Include answer sheet?</p>
+        </div>
       </div>
     </>
   );

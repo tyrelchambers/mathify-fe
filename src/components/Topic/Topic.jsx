@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { topics } from "../../constants/topics";
 import "./Topic.css";
+
 export const Topic = () =>
   topics.map((topic) => (
     <Link

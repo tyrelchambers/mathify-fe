@@ -7,6 +7,8 @@ import { acceptedEquationRoutes } from "../../routes/accepted.routes";
 import { DisplayWrapper } from "../DisplayWrapper/DisplayWrapper";
 import { useForm } from "react-hook-form";
 import SubtractionForm from "../../forms/SubtractionForm";
+import MultiplicationForm from "../../forms/MultiplicationForm";
+import DivisionForm from "../../forms/DivisionForm";
 
 const EquationWrapper = () => {
   const { equation } = useParams();
@@ -27,6 +29,8 @@ const EquationWrapper = () => {
   const forms = {
     addition: <AdditionForm {...defaultProps} />,
     subtraction: <SubtractionForm {...defaultProps} />,
+    multiplication: <MultiplicationForm {...defaultProps} />,
+    division: <DivisionForm {...defaultProps} />,
   };
 
   return (
